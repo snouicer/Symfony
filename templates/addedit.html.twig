@@ -1,0 +1,28 @@
+{% extends 'base.html.twig' %}
+
+{% block title %}
+{% if editMode %}
+  Editer la catégorie 
+    {% else %}
+    Ajouter d'une catégorie
+{% endif %}
+{% endblock %}
+{# {% block  title %} Ajout d'une Catégorie{% endblock %} #}
+{% form_theme formAddCategorie 'bootstrap_5_layout.html.twig' %}
+{% block body %}
+{% if editMode %}
+ <h1>Editer la catégorie:</h1>
+    {% else %}
+<h1> Ajouter d'une catégorie: </h1>
+{% endif %}
+{{ form(formAddCategorie) }}
+
+{# <button type="submit" class="btn-lg btn-primary">Valider la categorie</button> #}
+
+{# {% if editMode %}
+<button type="submit" class="btn-lg btn-primary">Enregister la categorie</button>
+    {% else %}
+<button type="submit" class="btn-lg btn-primary">Ajouter la categorie</button>
+{% endif %} #}
+
+{% endblock %}
