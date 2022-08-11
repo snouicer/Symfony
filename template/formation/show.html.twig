@@ -1,0 +1,21 @@
+{% extends 'base.html.twig' %}
+
+{% block title %}détail d'une formation{% endblock %}
+
+{% block body %}
+<h1> Détail de la formation {{ formation}} </h1>
+Intilulé: {{ formation}} <br>
+Desciption: {{formation.description }}<br>
+
+<h2>Date des sessions:</h2>
+
+{% if formation.sessions | length > 0 %}
+        {% for session in formation.sessions %}
+        <li>{{session}} </li> 
+        {% endfor %}
+    {% else %}
+    Il n'y a pas de session pour cette formation
+{% endif %}
+
+
+{% endblock %}

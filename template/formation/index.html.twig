@@ -1,0 +1,38 @@
+{% extends 'base.html.twig' %}
+
+{% block title %}Liste des formation!{% endblock %}
+
+{% block body %}
+
+<h1>Liste des formations</h1>
+
+ <a class="btn btn-lg btn-dark" href="{{ path('add_formation') }}"> Ajouter une formation</a>
+<div class="box-tab">
+    <table class="table">
+    <thead class="thead-light">
+        <tr>
+        <th scope="col">FORMATIONS {{'('~ formations | length ~')' }} </th>
+        <th scope="col">MODIFICATION</th>
+        <th scope="col">SUPPRESSION</th>
+        </tr>
+    </thead>
+    <tbody>
+            {% if  formations | length > 0 %}
+                {% for formation in formations %}
+                <tr>
+                    <td><a href="{{path('show_formation',{'id': formation.id}) }}"> {{ formation }} </a></td>
+                    <td><a class=" fs-6 badge rounded-pill border bg-success link-light text-decoration-none" href="{{ path('edit_formation', {'id':formation.id}) }}"> Editer</a></td>
+                    <td><a class=" fs-6 badge rounded-pill border bg-danger link-light text-decoration-none" href="{{ path('remove_formation', {'id':formation.id}) }}"> Supprimer </a></td>   
+                </tr>
+
+                {% endfor %}
+            {% else %}
+                <p>Il n'a pas de formation</p>
+            {% endif %}
+    </tbody>
+    </table>
+</div>
+
+
+
+{% endblock %}
