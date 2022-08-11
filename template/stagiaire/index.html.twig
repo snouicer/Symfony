@@ -1,0 +1,39 @@
+{% extends 'base.html.twig' %}
+
+{% block title %}Liste des stagiaires{% endblock %}
+
+{% block body %}
+    <h1>Liste de stagiaires </h1>
+    <a class="btn btn-lg btn-dark" href="{{ path('add_stagiaire') }}"> Ajouter un stagiaire</a>
+
+<div class="box-tab">
+    <table class="table">
+      <thead class="thead-light">
+        <tr>
+          <th scope="col">STAGIAIRES  {{'('~ stagiaires | length ~')' }} </th>
+          <th scope="col">EMAIL</th>
+          <th scope="col">TELEPHONE</th>
+          <th scope="col">MODIFIER</th>
+          <th scope="col">SUPPRIMER</th>
+        </tr>
+      </thead>
+      <tbody>
+            {% if  stagiaires | length > 0 %}
+                {% for stagiaire in stagiaires %}
+                <tr>
+                    <td><a href="{{ path('show_stagiaire', {'id': stagiaire.id }) }}">{{ stagiaire ~' '~ stagiaire.prenom }}</a></td> 
+                    {# <a href=""><button>  Ajouter  </button></a></td>#}
+                    <td>{{ stagiaire.email }}</td>
+                    <td>{{ stagiaire.tel }}</td>
+                    <td><a class=" fs-6 badge rounded-pill border bg-success link-light text-decoration-none" href="{{ path('edit_stagiaire', {'id':stagiaire.id}) }}"> Editer </a></td>
+                    <td><a class=" fs-6 badge rounded-pill border bg-danger link-light text-decoration-none" href="{{ path('remove_stagiaire', {'id':stagiaire.id}) }}"> Supprimer </a></td> 
+                </tr>
+                {% endfor %}
+            {% else %}
+                 <p>Il n'a pas de stagiaire</p>
+            {% endif %}
+      </tbody>
+    </table>
+</div>
+
+{% endblock %}

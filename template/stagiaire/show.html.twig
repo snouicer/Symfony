@@ -1,0 +1,22 @@
+{% extends 'base.html.twig' %}
+
+{% block title %}Detail du stagiaire{% endblock %}
+
+{% block body %}
+    <h1>Détail du stagiaire: </h1>
+
+        <b>Sexe: </b>{{ stagiaire.sexe }} <br>
+        <b>Nom et prenom: </b>{{ stagiaire ~' '~ stagiaire.prenom }}<br>
+        <b>Ville:</b> : {{ stagiaire.ville}}<br>
+        <b>Email : </b>{{ stagiaire.email }}<br>
+        <b> Télephone : </b>{{ stagiaire.tel }} <br>
+
+    <h1>Date des prochaines session du stagiaire: </h1>
+    {% for session in stagiaire.sessions %}
+    <ul>
+        <li> 
+            <a href="{{ path('show_session', {'id': session.id}) }}"> {{session}} </a>
+        </li>
+    </ul>
+     {% endfor %}
+{% endblock %}
