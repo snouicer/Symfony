@@ -1,0 +1,18 @@
+/* General -------------------------------------*/
+*{
+    margin:0;
+    box-sizing: border-box;
+}
+/* body -----------------------------------------*/
+body{
+    background-color:rgba(205, 205, 205, 0) !important;
+ 
+}
+h1{
+    color: rgb(38, 0, 255);
+}
+
+.container{
+    max-width:45%;
+    margin:auto; 
+}
