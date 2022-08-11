@@ -1,0 +1,39 @@
+{% extends 'base.html.twig' %}
+
+{% block title %}Liste des catégories!{% endblock %}
+
+{% block body %}
+    <h1>Liste des catégories</h1>
+    {# <a href="{{ path('add_categorie') }}">Ajouter une categorie </a> #}
+     <a class="btn btn-lg btn-dark" href="{{ path('add_categorie') }}">Ajouter une categorie</a>
+<div class="box-tab">
+    <table class="table">
+    <thead class="thead-light">
+        <tr>
+        <th scope="col">CATEGORIES {{'('~ categories | length ~')' }} </th>
+        <th scope="col">MODIFICATION</th>
+        <th scope="col">SUPPRESSION</th>
+        </tr>
+    </thead>
+    <tbody>
+            {% if  categories | length > 0 %}
+                {% for categorie in categories %}
+                <tr>
+                    <td><a href="{{path('show_categorie',{'id': categorie.id}) }}"> {{ categorie }} </a></td>
+                    <td><a class=" fs-6 badge rounded-pill border bg-success link-light text-decoration-none" href="{{ path('edit_categorie', {'id':categorie.id}) }}"> Editer</a></td>
+                    <td><a class=" fs-6 badge rounded-pill border bg-danger link-light text-decoration-none" href="{{ path('remove_categorie', {'id':categorie.id}) }}"> Supprimer </a></td>   
+                </tr>
+
+                {% endfor %}
+            {% else %}
+                <p>Il n'a pas de catégorie</p>
+            {% endif %}
+    </tbody>
+    </table>
+</div>
+
+
+
+
+
+{% endblock %}
