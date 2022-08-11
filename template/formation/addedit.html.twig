@@ -1,0 +1,27 @@
+{% extends 'base.html.twig' %}
+
+{% block title %}
+    {% if editMode %}
+    Editer la formation 
+        {% else %}
+        Ajouter d'une formation
+    {% endif %}
+{% endblock %}
+
+{% form_theme formAddFormation 'bootstrap_5_layout.html.twig' %}
+{% block body %}
+ {% if editMode %}
+ <h1> Editer la formation </h1>
+    {% else %}
+  <h1>  Ajouter d'une formation </h1>
+{% endif %}
+
+{{ form(formAddFormation) }}
+
+{# {% if editMode %}
+<button type="submit" class="btn-lg btn-primary">Enregister la formation</button>
+    {% else %}
+<button type="submit" class="btn-lg btn-primary">Ajouter la formation</button>
+{% endif %} #}
+
+{% endblock %}
