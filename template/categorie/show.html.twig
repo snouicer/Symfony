@@ -1,0 +1,20 @@
+{% extends 'base.html.twig' %}
+
+{% block title %}détail de la categorie{% endblock %}
+
+{% block body %}
+
+<h1>détail de la categorie: {{ categorie }} : </h1> <br>
+
+<h2>Liste de modules 
+e </h2>
+        {# moduleFormations #}
+{% if categorie.moduleformations | length > 0 %}
+        {% for moduleformation in categorie.moduleformations %}
+        <li> {{ moduleformation }} </li>
+        {% endfor %}
+    {% else %}
+    Il n'y a pas de module pour cette categorie
+{% endif %}
+        
+{% endblock %}
