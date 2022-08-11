@@ -1,0 +1,83 @@
+{% extends 'base.html.twig' %}
+
+{% block title %}Messagerie
+{% endblock %}
+{% block body %}
+	<section class="container">
+		<div class="row">
+			<div class="col">
+				<h1>Messagerie</h1>
+				<p>Résumé de la messagerie</p>
+				<p>Reçus: {{ app.user.received | length }} </p>
+				<p>Envoyé: {{ app.user.sent | length }}</p>
+				<a class="btn btn-lg btn-dark" data-bs-toggle="offcanvas" href="#offcanvasExample" role="button" aria-controls="offcanvasExample">
+					Voir mes dossiers</a>
+				<br> <br>
+				<a class="btn btn-lg btn-dark" href="{{ path('app_send') }}">Envoyer un message</a>
+				<div class="offcanvas offcanvas-start" tabindex="-1" id="offcanvasExample" aria-labelledby="offcanvasExampleLabel">
+					<div class="offcanvas-header">
+						<h2 class="offcanvas-title" id="offcanvasExampleLabel">Mes dossiers</h2>
+						<button type="button" class="btn-close" data-bs-dismiss="offcanvas" aria-label="Close"></button>
+					</div>
+					<div class="offcanvas-body">
+                        <div class="list-group">
+                        <a href="{{ path("app_messages") }}" class="list-group-item list-group-item-dark list-group-item-action active">Acceuil</a>
+                        </div>
+                        <div class="list-group">
+                        <a href="{{ path("app_received") }}" class="list-group-item list-group-item-dark list-group-item-action">Boîte de réception</a>
+                        </div>
+                        <div class="list-group">
+                        <a href="{{ path("app_sent") }}" class="list-group-item list-group-item-dark list-group-item-action">Elément envoyés</a>
+                        </div>
+					</div>
+				</div>
+			</div>
+		</div>
+	</section>
+
+{# Mise en page////////////////////////////////////////////////////////////////////// 
+   <h1>Messagerie</h1>
+   <p>Resumé de la Messagerie</p>
+    <a class="btn btn-lg btn-dark" href="{{ path('add_module_formation') }}"> Ajouter un module</a>
+<div class="box-tab">
+    <table class="table">
+    <thead class="thead-light">
+        <tr>
+            <th scope="col">Reçus: {{ app.user.received | length }}  </th>
+			
+            <th scope="col">Envoyé: {{ app.user.sent | length }}</th>
+            <th scope="col">DUREE </th>
+            <th scope="col">MODIFICATION</th>
+            <th scope="col">SUPPRESSION</th>
+        </tr>
+    </thead>
+    <tbody>
+            {% if moduleformations | length > 0 %}
+                {% for moduleformation in moduleformations %}
+                <tr>
+                    <td><a href="{{path('show_module_formation',{'id': moduleformation.id}) }}"> {{ moduleformation }} </a></td>
+                    <td>{{ moduleformation.categorie }} </td>
+                     <td>{% if moduleformation.programmes | length > 0 %}
+                    {% for programme in moduleformation.programmes %}
+                    {{ programme.nbJours }} jours
+                    {% endfor %}
+                    {% else %}
+                    NO
+                    {% endif %}
+                    </td>
+                    <td><a class=" fs-6 badge rounded-pill border bg-success link-light text-decoration-none" href="{{ path('edit_module_formation', {'id':moduleformation.id}) }}"> Editer</a></td>
+                    <td><a class=" fs-6 badge rounded-pill border bg-danger link-light text-decoration-none" href="{{ path('remove_module_formation', {'id':moduleformation.id}) }}"> Supprimer </a></td>   
+                </tr>
+                {% endfor %}
+            {% else %}
+                <p> Il n'a pas de module</p>
+            {% endif %}
+    </tbody>
+    </table>
+</div> #}
+
+
+
+
+
+{% endblock %}
