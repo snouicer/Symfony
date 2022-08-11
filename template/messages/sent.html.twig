@@ -1,0 +1,68 @@
+{% extends 'base.html.twig' %}
+{# {% form_theme formSend 'bootstrap_5_layout.html.twig' %} #}
+{% block title %}Messagerie
+{% endblock %}
+{% block body %}
+	<section class="container">
+		<div class="row">
+			<div class="col">
+				<h1>Messagerie</h1>
+				<h2>Eléments envoyés</h2>
+				<p>Vous avez envoyés: {{ app.user.sent | length}} messages</p>
+			</div>
+			<div class="col-5">De</div>
+			<div class="col-2">Sujet</div>
+			<div class="col-4">Date</div>
+			<div class="col-1">Actions</div>
+			<hr>
+			{% for message in app.user.sent  %}
+				{% if message.isRead == 0 %}
+					{% set bold ="fw-bold" %}
+				{% else %}
+					{% set bold = "" %}
+				{% endif %}
+				<div class="col-5 {{ bold }}">{{ message.sender.email }}</div>
+				<div class="col-2 {{ bold }}">
+					<a href="{{ path ('app_read', {id:message.id}) }}">
+						{{message.title }}
+					</a>
+				</div>
+				<div class="col-4 {{ bold }}">{{ message.createdAt|date }}</div>
+				<div class="col-1">
+                    <a href="{{ path ('app_remove_message', {id:message.id}) }}">
+                        <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" fill="currentColor" class="bi bi-trash-fill text-danger" viewbox="0 0 16 16">
+                            <path d="M2.5 1a1 1 0 0 0-1 1v1a1 1 0 0 0 1 1H3v9a2 2 0 0 0 2 2h6a2 2 0 0 0 2-2V4h.5a1 1 0 0 0 1-1V2a1 1 0 0 0-1-1H10a1 1 0 0 0-1-1H7a1 1 0 0 0-1 1H2.5zm3 4a.5.5 0 0 1 .5.5v7a.5.5 0 0 1-1 0v-7a.5.5 0 0 1 .5-.5zM8 5a.5.5 0 0 1 .5.5v7a.5.5 0 0 1-1 0v-7A.5.5 0 0 1 8 5zm3 .5v7a.5.5 0 0 1-1 0v-7a.5.5 0 0 1 1 0z"/>
+                        </svg>
+                    </a>
+				</div>
+				<hr>
+			{% endfor %}
+			<br><br><br>
+			<div class="col">
+				<a class="btn btn-lg btn-dark" data-bs-toggle="offcanvas" href="#offcanvasExample" role="button" aria-controls="offcanvasExample">
+					Voir mes dossiers</a>
+				<br><br>
+				<a class="btn btn-lg btn-dark" href="{{ path("app_send") }}">Envoyer un message</a>
+				{# <a href="#" class="btn btn primary">Envoyer un message</a> #}
+				<div class="offcanvas offcanvas-start" tabindex="-1" id="offcanvasExample" aria-labelledby="offcanvasExampleLabel">
+					<div class="offcanvas-header">
+						<h2 class="offcanvas-title" id="offcanvasExampleLabel">Mes dossiers</h2>
+						<button type="button" class="btn-close" data-bs-dismiss="offcanvas" aria-label="Close"></button>
+					</div>
+					<div class="offcanvas-body">
+						<div class="list-group">
+							<a href="{{ path("app_messages") }}" class="list-group-item list-group-item-dark list-group-item-action">Acceuil</a>
+						</div>
+						<div class="list-group">
+							<a href="{{ path("app_received") }}" class="list-group-item list-group-item-dark list-group-item-action ">Boîte de réception</a>
+						</div>
+						<div class="list-group">
+							<a href="{{ path("app_sent") }}" class="list-group-item list-group-item-dark list-group-item-action active">Elément envoyés</a>
+						</div>
+					</div>
+				</div>
+			</div>
+		</div>
+	</section>
+
+{% endblock %}
