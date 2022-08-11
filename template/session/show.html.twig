@@ -1,0 +1,48 @@
+{% extends 'base.html.twig' %}
+
+{% block title %}Détail d'une session{% endblock %}
+
+
+{% block body %}
+
+<h1> Détail de la session: </h1>
+<h2>{{session.formation.description}}</h2><br>
+
+<h2> Session : {{session.dateDebut | date('d-m-Y')}}</h2>
+<b>Formateur: {{ app.user.email  }}</b> <br>
+<b>Date de début: </b>{{session.dateDebut | date('d-m-Y')}} <br>
+<b>Date de Fin:</b> {{session.dateFin}} <br>
+<b>Nombre de places:</b> {{session.nbMax}}<br>
+<b>Nombre de places restante: </b>{{session.nbMax - session.stagiaires | length }}<br><br> 
+
+<h2>Liste des programmes de la session :</h2>
+{% if session.programmes | length > 0 %}
+        {% for programme in session.programmes %}
+        <li> Module: {{programme.moduleFormation}}  ({{ programme.nbJours }} jours) </li><br>
+        {% endfor %}
+    {% else %}
+    <p>Il n'y a pas de programme pour cette session</p>
+{% endif %}
+<br>
+
+<h2>Liste des stagiaires inscrit à cette session :</h2>
+{% if session.stagiaires | length > 0 %}
+        {% for stagiaire in session.stagiaires %}
+         <li><a href="{{path('show_stagiaire',{'id': stagiaire.id}) }}">{{ stagiaire}}</a>
+        {% endfor %}
+    {% else %}
+    Il n'y a pas de stagiaire inscrit à cette session
+{% endif %}
+
+
+<h2>Liste des stagiaires non inscrit à cette session :</h2>
+{% if session.stagiaires | length > 0 %}
+        {% for stagiaire in stagiaireNonInscrits  %}
+         <li><a href="{{path('show_stagiaire',{'id': stagiaire.id}) }}">{{ stagiaire}}</a>
+        {% endfor %}
+    {% else %}
+    Aucun stagiaires est inscrit
+{% endif %}
+
+
+{% endblock %}

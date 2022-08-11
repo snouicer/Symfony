@@ -1,0 +1,46 @@
+{% extends 'base.html.twig' %}
+{% form_theme formAddProgramme 'bootstrap_5_layout.html.twig' %}
+{% block body %}
+ {% if editMode %}
+ <h1> Editer la formation </h1>
+    {% else %}
+  <h1>  Ajouter d'une formation </h1>
+{% endif %}
+<h2>Ajouté ou modifier des programmes de la session :</h2>
+{# {{ form(formAddProgramme) }} #}
+{{ form_start(formAddProgramme) }}
+        {{form_row(formAddProgramme.session) }}
+        {{form_row(formAddProgramme.moduleFormation) }}
+        {{form_row(formAddProgramme.nbJours) }}
+        {# {{form_row(formAddProgramme.submit) }} #}
+        {# {{ form_row(formAddProgramme.submit, { 'label': 'valide' }) }} #}
+
+    {# <input type="hidden" id="maxNb" value="{{ session.nbPlace }}"> #}
+    <ul id="collections" data-prototype= "{{ form_row(formAddSession.programme.vars.prototype)|e('html_attr') }}">
+        {% for programme in formAddSession.programmes %}
+            <li class="collection">{{ form_row(programme) }}</li>
+        {% endfor %}
+    </ul>
+      {# {{form_row(formAddSession.submit) }} #}
+<button type="submit" class="btn-lg btn-primary">Enregister une Session</button>
+
+
+{{ form_end(formAddProgramme) }}
+<br>
+{% endblock %}
+
+
+{# {{ form(formAddProgramme) }} #}
+
+{# {% if editMode %}
+<button type="submit" class="btn-lg btn-primary">Enregister la formation</button>
+    {% else %}
+<button type="submit" class="btn-lg btn-primary">Ajouter la formation</button>
+{% endif %} #}
+
+
+{% block javascripts %}
+    {{ parent()}}
+    <script src="/js/collec.js"></script>
+   
+{% endblock %}

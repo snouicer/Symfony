@@ -1,0 +1,37 @@
+{% extends 'base.html.twig' %}
+
+{% block title %}Liste des sessions {% endblock %}
+
+{% block body %}
+<h1>Liste des sessions</h1>
+<a class="btn btn-lg btn-dark" href="{{ path('add_session') }}"> Ajouter une session</a>
+<div class="box-tab">
+    <table class="table">
+    <thead class="thead-light">
+        <tr>
+        <th scope="col">Intitulé sessions  {{'('~ sessions | length ~')' }} </th>
+        <th scope="col">Date début </th>
+        <th scope="col">Nb de places </th>
+        <th scope="col">MODIFICATION</th>
+        <th scope="col">SUPPRESSION</th>
+        </tr>
+    </thead>
+    <tbody>
+            {% if  sessions | length > 0 %}
+                {% for session in sessions %}
+                <tr>
+                    <td><a href="{{path('show_session',{'id': session.id}) }}">{{ session.formation }}</a></td>
+                    <td>{{session.dateDebut | date('d-m-Y')}} </td>
+                    <td>{{ session.NbMax }} </td>
+                    <td><a class=" fs-6 badge rounded-pill border bg-success link-light text-decoration-none" href="{{ path('edit_session', {'id':session.id}) }}"> Editer </a></td>
+                    <td><a class=" fs-6 badge rounded-pill border bg-danger link-light text-decoration-none" href="{{ path('remove_session', {'id':session.id}) }}"> Supprimer </a></td> 
+                </tr>  
+                {% endfor %}
+            {% else %}
+                <p>Il n'a pas de session</p>
+            {% endif %}
+    </tbody>
+    </table>
+</div>
+
+{% endblock %}
