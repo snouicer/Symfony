@@ -1,0 +1,52 @@
+{% extends 'base.html.twig' %}
+{# {% form_theme formAddProgramme 'bootstrap_5_layout.html.twig' %} #}
+{# {% block  title %} Ajout d'une session{% endblock %} #}
+{% block  title %} 
+    {% if editMode %}
+    Editer une session 
+        {% else %}
+        Ajout d'une session
+    {% endif %}
+{% endblock %}
+{% form_theme formAddSession 'bootstrap_5_layout.html.twig' %}
+
+{% block body %}
+ {# <h1>Ajoutez une session:</h1> #}
+ {% if editMode %}
+ <h1> Editer une session  </h1>
+    {% else %}
+  <h1>  Ajout d'une session </h1>
+{% endif %}
+
+{# {{ form(formAddSession) }} #}
+
+{# <button type="Submit"> Ajouter </button> #}
+
+   {{ form_start(formAddSession) }}
+        {# {{form_row(form.contenir) }}
+        {{form_row(form.Promotion) }} #}
+        {{form_row(formAddSession.nbMax) }}
+        {{form_row(formAddSession.dateDebut) }}
+        {{form_row(formAddSession.dateFin) }}
+        {{form_row(formAddSession.formation) }}
+        {# {{form_row(form.salle) }} #}
+   
+
+    {# <input type="hidden" id="maxNb" value="{{ session.nbPlace }}"> #}
+    <ul id="collections" data-prototype= "{{ form_row(formAddSession.programmes.vars.prototype)|e('html_attr') }}">
+        {% for programme in formAddSession.programmes %}
+            <li class="collection">{{ form_row(programme) }}</li>
+        {% endfor %}
+    </ul>
+      {# {{form_row(formAddSession.submit) }} #}
+<button type="submit" class="btn-lg btn-primary">Enregister une Session</button>
+{{ form_end(formAddSession) }}
+
+
+{% endblock %}
+{% block javascripts %}
+    {{ parent()}}
+    <script src="/js/collec.js"></script>
+   
+{% endblock %}
+
