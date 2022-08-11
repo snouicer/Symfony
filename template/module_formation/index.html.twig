@@ -1,0 +1,44 @@
+{% extends 'base.html.twig' %}
+
+{% block title %}Liste des modules{% endblock %}
+
+{% block body %}
+    <h1>Liste des modules</h1>
+    <a class="btn btn-lg btn-dark" href="{{ path('add_module_formation') }}"> Ajouter un module</a>
+<div class="box-tab">
+    <table class="table">
+    <thead class="thead-light">
+        <tr>
+            <th scope="col">MODULE {{'('~ moduleformations | length ~')' }} </th>
+            <th scope="col">CATEGORIES </th>
+            <th scope="col">DUREE </th>
+            <th scope="col">MODIFICATION</th>
+            <th scope="col">SUPPRESSION</th>
+        </tr>
+    </thead>
+    <tbody>
+            {% if moduleformations | length > 0 %}
+                {% for moduleformation in moduleformations %}
+                <tr>
+                    <td><a href="{{path('show_module_formation',{'id': moduleformation.id}) }}"> {{ moduleformation }} </a></td>
+                    <td>{{ moduleformation.categorie }} </td>
+                     <td>{% if moduleformation.programmes | length > 0 %}
+                    {% for programme in moduleformation.programmes %}
+                    {{ programme.nbJours }} jours
+                    {% endfor %}
+                    {% else %}
+                    NO
+                    {% endif %}
+                    </td>
+                    <td><a class=" fs-6 badge rounded-pill border bg-success link-light text-decoration-none" href="{{ path('edit_module_formation', {'id':moduleformation.id}) }}"> Editer</a></td>
+                    <td><a class=" fs-6 badge rounded-pill border bg-danger link-light text-decoration-none" href="{{ path('remove_module_formation', {'id':moduleformation.id}) }}"> Supprimer </a></td>   
+                </tr>
+                {% endfor %}
+            {% else %}
+                <p> Il n'a pas de module</p>
+            {% endif %}
+    </tbody>
+    </table>
+</div>
+
+{% endblock %}
