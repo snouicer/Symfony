@@ -1,0 +1,10 @@
+{% extends 'base.html.twig' %}
+
+{% block title %}Ajout d'un Stagiaire{% endblock %}
+{% form_theme formAddStagiaire 'bootstrap_5_layout.html.twig' %}
+{% block body %}
+
+<h1> Ajout d'un Stagiaire </h1>
+{{ form(formAddStagiaire) }}
+
+{% endblock %}
